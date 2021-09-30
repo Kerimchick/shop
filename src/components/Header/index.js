@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import Cart from "../../views/Cart";
 
 const Header = () => {
     const cart = useSelector((c) => c.cart)
