@@ -13,7 +13,7 @@ const Home = () => {
             {
                 catalog.map(item =>
                     <div className="col-md-3" key={item.id}>
-                        <img src={item.images} alt="image" className="w-100 h-50 py-4"/>
+                        <img src={item.images} alt="foto-product" className="w-100 h-50 py-4"/>
                         <h5>{item.title}</h5>
                         <p>{item.price}$</p>
                         <p>{item.description}</p>
