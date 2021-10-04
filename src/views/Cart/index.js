@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
+import {addToCart, decreaseProduct, removeFromCart} from "../../redux/action";
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -21,21 +22,21 @@ const Cart = () => {
                             </thead>
                             <tbody>
                             {
-                                cart.map(el =>
+                                cart.map(item =>
                                     <tr>
-                                        <td>{el.title}</td>
-                                        <td>{el.price}</td>
+                                        <td>{item.title}</td>
+                                        <td>{item.price}</td>
                                         <td>
                                             <button className="btn-sm btn btn-danger me-1"
-                                                    onClick={() => dispatch({type: "DECREASE_AMOUNT_IN_CART", payload: el})}>-</button>
-                                            {el.quantity}
+                                                    onClick={() => dispatch(decreaseProduct(item))}>-</button>
+                                            {item.quantity}
                                             <button className="btn-sm btn btn-success ms-1"
-                                                    onClick={() => dispatch({type: "ADD_TO_CART", payload: el})}>+</button>
+                                                    onClick={() => dispatch(addToCart(item))}>+</button>
                                         </td>
-                                        <td>{(el.price * el.quantity).toFixed(2)}</td>
+                                        <td>{(item.price * item.quantity).toFixed(2)}</td>
                                         <td>
                                             <button className="btn btn-danger"
-                                                    onClick={() => dispatch({type: "REMOVE_FROM_CART", payload : el.id})}
+                                                    onClick={() => dispatch(removeFromCart(item))}
                                             >Delete</button>
                                         </td>
                                     </tr>

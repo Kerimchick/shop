@@ -1,13 +1,23 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux"
-import {data} from "../../data"
+import {addToCart, getCatalog} from "../../redux/action";
 
 const Home = () => {
     let dispatch = useDispatch()
     const catalog = useSelector(store => store.catalog)
+    const isLoading = useSelector(store => store.isLoading)
     useEffect(() => {
-        dispatch({type: "GET_CATALOG", payload: data})
+        dispatch(getCatalog())
     }, [dispatch])
+
+    if(isLoading){
+        return <div className="lds-ellipsis">
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+            <div>.</div>
+        </div>
+    }
     return (
         <div className="row">
             {
@@ -18,7 +28,7 @@ const Home = () => {
                         <p>{item.price}$</p>
                         <p>{item.description}</p>
                         <button type="button" className="btn btn-primary"
-                        onClick={() => dispatch({type: "ADD_TO_CART", payload: item})}
+                        onClick={() => dispatch(addToCart(item))}
                         >Add to basket</button>
                     </div>
                 )
